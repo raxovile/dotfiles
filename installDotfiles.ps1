@@ -13,6 +13,10 @@ $gitConfigTarget = "$HOME\.gitconfig"
 $vimConfigSource = "$dotfilesDir\vim\_vimrc"
 $vimConfigTarget = "$HOME\_vimrc"
 
+# windows terminal configurationspath
+$wtConfigSource = "$dotfilesDir\windows_terminal\settings.json"
+$wtConfigTarget = "$HOME\AppData\Local\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState\settings.json"
+
 # $raxovile/dotfiles
 # Backup-Ordner festlegen
 $backupDir = "$HOME\dotfiles_backup"
@@ -72,4 +76,20 @@ if ((Test-Path -Path $vimConfigTarget) -and (Test-SymbolicLink $vimConfigTarget)
     Write-Host "Erstelle symbolischen Link für vim configuration von $vimConfigSource → $vimConfigTarget..."
     New-Item -ItemType SymbolicLink -Path $vimConfigTarget -Target $vimConfigSource | Out-Null
 }
+
+# ----------------------
+# Windows Terminal-Symbolischen Link erstellen
+# ----------------------
+if ((Test-Path -Path $wtConfigTarget) -and (Test-SymbolicLink $wtConfigTarget)) {
+    Write-Host "Symbolischer Link für Windows Terminal existiert bereits. Überspringe diesen Schritt."
+} else {
+    if (Test-Path -Path $wtConfigTarget) {
+        Write-Host "Sichere existierende Windows Terminal-Konfiguration von $wtConfigTarget nach $backupDir..."
+        Move-Item -Path $wtConfigTarget -Destination $backupDir -Force
+    }
+
+    Write-Host "Erstelle symbolischen Link für Windows Terminal von $wtConfigSource → $wtConfigTarget..."
+    New-Item -ItemType SymbolicLink -Path $wtConfigTarget -Target $wtConfigSource | Out-Null
+}
+
 Write-Host "Symbolische Links erfolgreich überprüft oder erstellt!"
