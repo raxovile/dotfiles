@@ -1,0 +1,11 @@
+{
+  "vimMode": true,
+  "attachmentFolderPath": "obsidian/img",
+  "showLineNumber": true,
+  "alwaysUpdateLinks": true,
+  "promptDelete": false,
+  "userIgnoreFilters": [
+    "obsidian/templates/",
+    "obsidian/"
+  ]
+}
