@@ -1,4 +1,7 @@
 " [[ Setting options ]]
+
+" Syntax aktivieren 
+syntax on
 " Zeilennummern aktivieren
 set number
 
@@ -50,7 +53,7 @@ set list
 set listchars=tab:»\ ,trail:·,nbsp:␣
 
 " Cursor-Zeile anzeigen
-set cursorline
+" set cursorline
 
 " Minimalen Abstand zum oberen und unteren Bildschirmrand halten
 set scrolloff=10
