@@ -49,9 +49,6 @@ set splitbelow
 set list
 set listchars=tab:»\ ,trail:·,nbsp:␣
 
-" Vorschau bei Ersetzungen im geteilten Fenster anzeigen
-set inccommand=split
-
 " Cursor-Zeile anzeigen
 set cursorline
 
