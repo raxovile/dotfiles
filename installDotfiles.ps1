@@ -9,6 +9,11 @@ $nvimTargetDir = "$HOME\AppData\Local\nvim"  # Standardpfad für Neovim in Windo
 $gitConfigSource = "$dotfilesDir\git\.gitconfig"
 $gitConfigTarget = "$HOME\.gitconfig"
 
+# vim-configurationspath
+$vimConfigSource = "$dotfilesDir\vim\_vimrc"
+$vimConfigTarget = "$HOME\_vimrc"
+
+# $raxovile/dotfiles
 # Backup-Ordner festlegen
 $backupDir = "$HOME\dotfiles_backup"
 
@@ -53,4 +58,18 @@ if ((Test-Path -Path $gitConfigTarget) -and (Test-SymbolicLink $gitConfigTarget)
     New-Item -ItemType SymbolicLink -Path $gitConfigTarget -Target $gitConfigSource | Out-Null
 }
 
+# ----------------------
+# vim link erstellen
+# ----------------------
+if ((Test-Path -Path $vimConfigTarget) -and (Test-SymbolicLink $vimConfigTarget)) {
+    Write-Host "Symbolischer Link für vim configuration existiert bereits. Überspringe diesen Schritt."
+} else {
+    if (Test-Path -Path $vimConfigTarget) {
+        Write-Host "Sichere existierende vim configuration von $vimConfigTarget nach $backupDir..."
+        Move-Item -Path $vimConfigTarget -Destination $backupDir -Force
+    }
+
+    Write-Host "Erstelle symbolischen Link für vim configuration von $vimConfigSource → $vimConfigTarget..."
+    New-Item -ItemType SymbolicLink -Path $vimConfigTarget -Target $vimConfigSource | Out-Null
+}
 Write-Host "Symbolische Links erfolgreich überprüft oder erstellt!"
