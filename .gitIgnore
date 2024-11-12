@@ -1,8 +1,7 @@
 tags
 test.sh
 .luarc.json
-nvim
 
 spell/
 lazy-lock.json
-PowerShellEditorService.json
+PowerShellEditorServices.json
