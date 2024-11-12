@@ -15,10 +15,10 @@ set mouse=a
 set noshowmode
 
 " System-Clipboard für Yank, Put und Delete verwenden
-set clipboard=unnamedplus
+set clipboard=unnamed
 
 " Conceal-Level setzen
-set conceallevel=1
+set conceallevel=2
 
 " Break-Indent aktivieren
 set breakindent
