@@ -5,7 +5,7 @@ return {
       'BufEnter ' .. vim.fn.expand '~' .. '/path-to-my-vault**',
     },
     opts = {
-      vault_dir = os.getenv 'OBSIDIAN_PATH' .. '/raxovile_2.0', -- Setzt das Vault-Verzeichnis für raxovile_2.0
+      vault_dir = os.getenv 'OBSIDIAN_PATH' .. '/ok_vault_2.0', -- Setzt das Vault-Verzeichnis für raxovile_2.0
       buffer_type = 'float', -- float | split | vsplit | tab
     },
   },
