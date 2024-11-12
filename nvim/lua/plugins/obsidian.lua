@@ -5,9 +5,7 @@ return {
       'BufEnter ' .. vim.fn.expand '~' .. '/path-to-my-vault**',
     },
     opts = {
-      local obsidian_path = os.getenv 'OBSIDIAN_PATH'
-
-      vault_dir = 'path/to/vault',
+      vault_dir = os.getenv 'OBSIDIAN_PATH' .. '/raxovile_2.0', -- Setzt das Vault-Verzeichnis für raxovile_2.0
       buffer_type = 'float', -- float | split | vsplit | tab
     },
   },
@@ -130,7 +128,7 @@ return {
         follow_img_func = function(img)
           vim.fn.jobstart { 'qlmanage', '-p', img }
           -- vim.fn.jobstart({"xdg-open", url})  -- linux
-          -- vim.cmd(':silent exec "!start ' .. url .. '"') -- Windows
+          -- vim.cmd(':silent exec "!start ' .. img .. '"') -- Windows
         end,
 
         use_advanced_uri = false,
