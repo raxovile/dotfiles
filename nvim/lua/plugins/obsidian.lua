@@ -2,7 +2,7 @@ return {
   {
     'hisbaan/dataview.nvim',
     event = {
-      'BufEnter ' .. vim.fn.expand '~' .. '/path-to-my-vault**',
+      'BufEnter ' .. vim.fn.expand(os.getenv 'OBSIDIAN_PATH' .. '/ok_vault_2.0') .. '/**',
     },
     opts = {
       vault_dir = os.getenv 'OBSIDIAN_PATH' .. '/ok_vault_2.0', -- Setzt das Vault-Verzeichnis für raxovile_2.0
@@ -163,7 +163,7 @@ return {
         },
 
         ui = {
-          enable = true,
+          -- enable = true,
           update_debounce = 200,
           max_file_length = 5000,
           checkboxes = {
