@@ -1,6 +1,3 @@
-[user]
-	name = raxovile
-	email = raxovile@outlook.com 
 [core]
 	editor = vim
 	autocrlf = true

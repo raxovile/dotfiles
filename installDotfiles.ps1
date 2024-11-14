@@ -6,8 +6,9 @@ $nvimSourceDir = "$dotfilesDir\nvim"
 $nvimTargetDir = "$HOME\AppData\Local\nvim"  # Standardpfad für Neovim in Windows
 
 # Git-Konfigurationspfade
-$gitConfigSource = "$dotfilesDir\git\.gitconfig"
-$gitConfigTarget = "$HOME\.gitconfig"
+# #toDo - how to sperate identical and different stuff in gitconfig
+# $gitConfigSource = "$dotfilesDir\git\.gitconfig"
+# $gitConfigTarget = "$HOME\.gitconfig"
 
 # vim-configurationspath
 $vimConfigSource = "$dotfilesDir\vim\_vimrc"
@@ -50,17 +51,17 @@ if ((Test-Path -Path $nvimTargetDir) -and (Test-SymbolicLink $nvimTargetDir)) {
 # ----------------------
 # Git-Symbolischen Link erstellen
 # ----------------------
-if ((Test-Path -Path $gitConfigTarget) -and (Test-SymbolicLink $gitConfigTarget)) {
-    Write-Host "Symbolischer Link für Git-Konfiguration existiert bereits. Überspringe diesen Schritt."
-} else {
-    if (Test-Path -Path $gitConfigTarget) {
-        Write-Host "Sichere existierende Git-Konfiguration von $gitConfigTarget nach $backupDir..."
-        Move-Item -Path $gitConfigTarget -Destination $backupDir -Force
-    }
-
-    Write-Host "Erstelle symbolischen Link für Git-Config von $gitConfigSource → $gitConfigTarget..."
-    New-Item -ItemType SymbolicLink -Path $gitConfigTarget -Target $gitConfigSource | Out-Null
-}
+# if ((Test-Path -Path $gitConfigTarget) -and (Test-SymbolicLink $gitConfigTarget)) {
+# Write-Host "Symbolischer Link für Git-Konfiguration existiert bereits. Überspringe diesen Schritt."
+# } else {
+# if (Test-Path -Path $gitConfigTarget) {
+# Write-Host "Sichere existierende Git-Konfiguration von $gitConfigTarget nach $backupDir..."
+# Move-Item -Path $gitConfigTarget -Destination $backupDir -Force
+# }
+# 
+# Write-Host "Erstelle symbolischen Link für Git-Config von $gitConfigSource → $gitConfigTarget..."
+# New-Item -ItemType SymbolicLink -Path $gitConfigTarget -Target $gitConfigSource | Out-Null
+# }
 
 # ----------------------
 # vim link erstellen
