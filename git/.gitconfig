@@ -1,5 +1,11 @@
+[user]
+	name = Raphael Brand
+	email = rbr@objektkultur.de
 [core]
 	editor = vim
-	autocrlf = true
+[init]
+	defaultBranch = main
 [color]
 	ui = auto
+[alias]
+	st = status
