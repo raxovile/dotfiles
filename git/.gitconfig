@@ -1,6 +1,6 @@
 [user]
-	name = Raphael Brand
-	email = rbr@objektkultur.de
+	name = raxovile 
+	email = raxovile@outlook.com
 [core]
 	editor = vim
 [init]
@@ -9,3 +9,5 @@
 	ui = auto
 [alias]
 	st = status
+[push]
+	autoSetupRemote = simple
