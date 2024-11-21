@@ -23,7 +23,7 @@ require('lazy').setup({
   { import = 'plugins.prettier' },
   { import = 'plugins.todo-comments' },
   { import = 'plugins.mini' },
-  { import = 'plugins.treesitter' },
+--  { import = 'plugins.treesitter' },
   { import = 'plugins.obsidian' },
 }, {
   ui = {
@@ -45,3 +45,4 @@ require('lazy').setup({
     },
   },
 })
+
