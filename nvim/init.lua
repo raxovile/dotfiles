@@ -19,7 +19,7 @@ require('lazy').setup({
   { import = 'plugins.completion' },
   { import = 'plugins.dap' },
   { import = 'plugins.telescope' },
-  --  { import = 'plugins.treesitter' },
+{ import = 'plugins.treesitter' },
   --  { import = 'plugins.obsidian' },
 }, {
   ui = {

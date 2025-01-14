@@ -1,0 +1,19 @@
+{
+  "tabWidth": 2,
+  "useTabs": false,
+  "printWidth": 80,
+  "proseWrap": "always",
+  "singleQuote": false,
+  "trailingComma": "none",
+  "overrides": [
+    {
+      "files": "*.md",
+      "options": {
+        "parser": "markdown",
+        "tabWidth": 2,
+        "printWidth": 80,
+        "proseWrap": "always"
+      }
+    }
+  ]
+}

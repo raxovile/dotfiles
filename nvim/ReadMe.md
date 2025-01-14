@@ -93,7 +93,7 @@ Der `nvim-cmp` Completion-Engine bietet kontextbezogene Vervollständigungen im 
 ### DAP Plugin
 
 **Zweck:**  
-Die Debugging-Plugins `nvim-dap` und `nvim-dap-ui` ermöglichen das Debuggen direkt innerhalb von Neovim. Sie unterstützen unter anderem .NET- und PowerShell-Anwendungen.
+Die Debugging-Plugins `nvim-dap`, `nvim-dap-ui` und `nvim-dap-virtual-text` ermöglichen das Debuggen direkt innerhalb von Neovim. Sie unterstützen unter anderem .NET- und PowerShell-Anwendungen und bieten eine erweiterte Visualisierung von Debug-Informationen.
 
 **Hauptkomponenten:**
 
@@ -101,12 +101,24 @@ Die Debugging-Plugins `nvim-dap` und `nvim-dap-ui` ermöglichen das Debuggen dir
   - **.NET (CoreCLR):** Einrichtung von `netcoredbg` für C#-Anwendungen.
   - **PowerShell:** Konfiguration von PowerShell Editor Services für das Debuggen von PowerShell-Skripten.
   
+- **Virtuelle Debug-Informationen:**
+  - Das Plugin `nvim-dap-virtual-text` zeigt Variablenwerte und Debugging-Informationen direkt im Quellcode an, wodurch die Nachverfolgung von Programmzuständen erheblich erleichtert wird.
+
 - **Konfigurationen:**  
-  - `.cs`-Dateien und PowerShell-Skripte werden speziell konfiguriert.
-  
+  - `.cs`-Dateien und PowerShell-Skripte werden speziell für Debugging-Aufgaben konfiguriert.
+  - Die virtuelle Textanzeige für Debugging-Informationen ist standardmäßig aktiviert und kann mit `:DapVirtualTextEnable` oder `:DapVirtualTextDisable` angepasst werden.
+
 - **Keybindings:**  
-  - Standardisierte Debugging-Tasten wie `<F5>`, `<F10>`, `<F11>`, `<F12>`, etc.
-  - Breakpoint-Verwaltung und REPL-Zugriffe über `<Leader>`-Shortcuts.
+  - Standardisierte Debugging-Tasten wie `<F5>` (Fortfahren), `<F10>` (Schritt überspringen), `<F11>` (Schritt hinein), `<F12>` (Schritt hinaus).
+  - Breakpoint-Verwaltung (`<Leader>b` zum Hinzufügen/Entfernen von Breakpoints) und erweiterte Aktionen wie bedingte Breakpoints (`<Leader>B`) oder Logpunkte (`<Leader>lp`).
+  - Zugriff auf das REPL (`<Leader>dr`) und das erneute Ausführen von Debug-Sitzungen (`<Leader>dl`).
+
+**Vorteile der Integration von `nvim-dap-virtual-text`:**
+- Direkte Visualisierung von Variablenwerten und Änderungen im Quellcode.
+- Unterstützung für mehrere Debug-Adapter.
+- Anpassbare Anzeigeoptionen, wie z. B. das Hervorheben geänderter Variablen oder das Anzeigen von Stop-Gründen.
+
+Mit diesen Tools wird Neovim zu einer umfassenden und visuellen Debugging-Umgebung, die sowohl für Anfänger als auch für fortgeschrittene Entwickler geeignet ist.
 
 ### Git-bezogene Plugins
 

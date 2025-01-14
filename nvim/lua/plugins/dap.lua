@@ -81,4 +81,18 @@ return {
     'rcarriga/nvim-dap-ui',
     dependencies = { 'mfussenegger/nvim-dap' },
   },
+  {
+    'theHamsta/nvim-dap-virtual-text', -- Ergänzung für Debugging-Informationen im Quellcode
+    dependencies = { 'mfussenegger/nvim-dap' }, -- Abhängigkeit zu nvim-dap
+    config = function()
+      require('nvim-dap-virtual-text').setup {
+        enabled = true, -- Aktiviert die virtuelle Textanzeige
+        enabled_commands = true, -- Aktiviert :DapVirtualTextEnable/Disable-Befehle
+        highlight_changed_variables = true, -- Hebt geänderte Variablen hervor
+        highlight_new_as_changed = true, -- Hebt neue Variablen als geändert hervor
+        show_stop_reason = true, -- Zeigt den Grund für das Stoppen an
+        commented = false, -- Fügt keine Kommentare zu den Variablen hinzu
+      }
+    end,
+  },
 }
