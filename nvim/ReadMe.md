@@ -303,7 +303,7 @@ Das Theme-Plugin `onedarkpro.nvim` sorgt für eine ansprechende und klare Farbge
 **Zweck:**  
 Diese Datei bündelt eine Sammlung kleiner, aber nützlicher Plugins, die verschiedene unterstützende Funktionen bereitstellen und den Arbeitsalltag in Neovim erleichtern.
 
-**Datei:** `misc.lua`
+**Datei:** `utility.lua`
 
 **Enthaltene Plugins und ihre Funktionen:**
 - **vim-sleuth:**  
