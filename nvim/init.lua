@@ -23,8 +23,8 @@ require('lazy').setup({
   { import = 'plugins.prettier' },
   { import = 'plugins.todo-comments' },
   { import = 'plugins.mini' },
---  { import = 'plugins.treesitter' },
---  { import = 'plugins.obsidian' },
+  --  { import = 'plugins.treesitter' },
+  --  { import = 'plugins.obsidian' },
 }, {
   ui = {
     -- Customize the LazyVim UI
@@ -45,4 +45,3 @@ require('lazy').setup({
     },
   },
 })
-

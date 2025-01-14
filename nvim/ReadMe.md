@@ -1,262 +1,115 @@
-# neovim configuration
+# Neovim Configuration Project
 
-## Inhaltsverzeichnis
+## Overview
+This project contains a comprehensive Neovim configuration tailored for efficient and personalized development workflows. It leverages plugins managed by `lazy.nvim` and custom Lua scripts for settings, keymaps, and autocommands.
 
-- [Ordnerstruktur](#ordnerstruktur)
-- [Plugins](#plugins)
-  - [Utility Plugins](#utility-plugins)
-  - [LSP Plugins](#lsp-plugins)
-  - [Editor Plugins](#editor-plugins)
-  - [UI Plugins](#ui-plugins)
-  - [Completion Plugins](#completion-plugins)
-  - [DAP Plugins](#dap-plugins)
-  - [Fuzzy Finder Plugins](#fuzzy-finder-plugins)
-  - [Key Mapping Plugins](#key-mapping-plugins)
-  - [Indentation Plugins](#indentation-plugins)
-  - [Additional Plugins](#additional-plugins)
-  - [Obsidian Plugin](#obsidian-plugin)
+---
 
-## Ordnerstruktur
+## Table of Contents
+1. [Project Structure](#project-structure)
+2. [Plugins](#plugins)
+3. [Key Features](#key-features)
+4. [Basic Keymaps](#basic-keymaps)
+5. [Configurations](#configurations)
+   - [Globals](#globals)
+   - [Options](#options)
+   - [Autocommands](#autocommands)
+   - [Lazy Installation](#lazy-installation)
 
-Die Konfigurationsdateien sind wie folgt organisiert:
+---
 
-~/.config/nvim/ ├── init.lua └── lua ├── basicAutocommands.lua ├── globals.lua ├── lazyInstallation.lua ├── options.lua ├── plugins │   ├── completion.lua │   ├── dap.lua │   ├── editor.lua │   ├── lsp.lua │   ├── telescope.lua │   ├── which-key.lua │   ├── indent-blankline.lua │   ├── prettier.lua │   ├── copilot.lua │   ├── todo-comments.lua │   ├── mini.lua │   ├── treesitter.lua │   ├── ui.lua │   └── utility.lua
+## Project Structure
+```
+├── init.lua               # Main entry point
+├── globals.lua            # Global variables and leader key settings
+├── options.lua            # Neovim options and basic keymaps
+├── basicAutocommands.lua  # Autocommands
+├── lazyInstallation.lua   # Lazy.nvim setup and plugin manager
+├── stylua.toml            # Configuration for Lua code formatting
+├── .clang-format          # Configuration for C/C++ code formatting
+├── plugins/               # Directory containing plugin-specific configurations
+```
 
-Copy
+---
 
 ## Plugins
+Plugins are managed using `lazy.nvim` and organized into categories for maintainability. Below is an overview of the plugin categories:
 
-### Utility Plugins
+- **Utility**: General-purpose plugins for productivity enhancements.
+- **LSP**: Language Server Protocol configurations for code intelligence.
+- **Editor**: Tools to improve editing experience.
+- **Theme**: Appearance and UI customization.
+- **Completion**: Autocompletion and snippet management.
+- **DAP**: Debug Adapter Protocol integrations.
+- **Telescope**: Fuzzy finder and search capabilities.
+- **Which-Key**: Keybinding guide.
+- **Indent-Blankline**: Visual indentation guides.
+- **Prettier**: Code formatting.
+- **Todo-Comments**: Highlight TODO comments.
+- **Mini**: Mini.nvim suite for small utility tools.
+- **Obsidian**: Integration with Obsidian markdown notes.
 
-- **tpope/vim-sleuth**:
-  - Automatische Erkennung von Tabstop- und Shiftwidth-Einstellungen in Dateien.
-- **folke/lazy.nvim**:
-  - Plugin-Manager, der Plugins effizient lädt und verwaltet.
-- **BurntSushi/ripgrep**:
-  - Ripgrep-Integration für schnelles Durchsuchen von Dateien im Projekt (schneller als `grep`).
-- **nvim-lua/plenary.nvim**:
-  - Hilfsbibliothek, die von vielen Neovim-Plugins verwendet wird (z.B. für Dateisystemoperationen).
-- **PProvost/vim-ps1**:
-  - Syntax-Highlighting und grundlegende Unterstützung für PowerShell-Scripts in Neovim.
-- **KaiWalter/azure-functions.nvim**:
-  - Unterstützung für Azure Functions, ermöglicht Interaktionen und Verwaltung von Azure Functions innerhalb von Neovim.
+---
 
-### LSP Plugins
+## Key Features
+- **Leader Key**: Set to `<Space>` for faster navigation and keybinding.
+- **Clipboard Integration**: Seamlessly sync clipboard between OS and Neovim.
+- **Split Navigation**: Easy navigation with `<Ctrl-h/j/k/l>`.
+- **Highlight on Yank**: Visual feedback when copying text.
+- **PowerShell as Default Shell**: Configured for Windows and Unix-based systems.
+- **Fold Configuration**: Tree-sitter based folding setup.
 
-- **nvim-lua/lsp-status.nvim**:
-  - Zeigt LSP-Statusinformationen wie Linting und Fehlerstatus in der Statusleiste an.
-- **dense-analysis/ale**:
-  - Asynchrone Linting-Engine, die Fehler und Warnungen während der Codebearbeitung anzeigt.
-- **TheLeoP/powershell.nvim**:
-  - PowerShell Language Server Protocol (LSP) Unterstützung, bietet Autocomplete und Fehlerüberprüfung für PowerShell-Skripte.
-- **jose-elias-alvarez/null-ls.nvim**:
-  - Integration von externen Linter-, Formatter- und anderen Tools in den Neovim LSP. Unterstützt benutzerdefinierte Konfigurationen für verschiedene Sprachen.
-  - Beispiel für die Konfiguration von `clang_format` und `prettier` für mehrere Sprachen:
+---
 
-    ```lua
-    require('null-ls').setup {
-      sources = {
-        require('null-ls').builtins.formatting.clang_format.with {
-          filetypes = { 'c', 'cpp', 'cs', 'typescript', 'javascript', 'json' },
-        },
-        require('null-ls').builtins.formatting.prettier.with {
-          filetypes = { 'javascript', 'typescript', 'css', 'json', 'yaml', 'markdown', 'html' },
-        },
-      },
-    }
-    ```
-- **neovim/nvim-lspconfig**:
-  - Haupt-Plugin für die Konfiguration und Verwaltung von LSP-Servern.
-  - **williamboman/mason.nvim**:
-    - Automatische Installation und Verwaltung von LSPs und zugehörigen Tools.
-  - **williamboman/mason-lspconfig.nvim**:
-    - Integration von mason.nvim mit nvim-lspconfig.
-  - **WhoIsSethDaniel/mason-tool-installer.nvim**:
-    - Automatische Installation von Tools, die von LSPs verwendet werden.
-  - **j-hui/fidget.nvim**:
-    - Zeigt nützliche Status-Updates für LSP an.
-  - **nvim-lua/lsp-status.nvim**:
-    - Anzeige des LSP-Status in der Statusleiste
-  - **hrsh7th/cmp-nvim-lsp**:
-    - Zusätzliche LSP-Fähigkeiten für nvim-cmp.
+## Basic Keymaps
+- `<Esc>`: Clear search highlights.
+- `<Ctrl-h/j/k/l>`: Navigate between splits.
+- `<Leader>q`: Open diagnostic quickfix list.
+- Arrow keys disabled in normal mode for better habits (`h/j/k/l` prompts).
+- `<Esc><Esc>`: Exit terminal mode.
 
-### Editor Plugins
+---
 
-- **tpope/vim-fugitive**:
-  - Git-Integration für Neovim. Ermöglicht Git-Kommandos direkt in Neovim auszuführen.
-- **rcarriga/nvim-dap-ui**:
-  - UI für das Debugging-Plugin DAP (Debug Adapter Protocol), um Debugging-Informationen grafisch anzuzeigen.
-- **lewis6991/gitsigns.nvim**:
-  - Zeigt Git-Änderungen in der Gutter-Leiste an (z.B. geänderte, hinzugefügte und entfernte Zeilen).
-- **windwp/nvim-autopairs**:
-  - Automatisches Einfügen und Schließen von Klammern, Anführungszeichen und anderen Zeichen.
-- **stevearc/conform.nvim**:
-  - Automatisches Formatieren von Code beim Speichern.
-- **prettier**:
-  - Ein Code-Formatierer, der von Null-LS verwendet wird, unterstützt verschiedene Dateitypen wie JavaScript, CSS, JSON, YAML, Markdown und HTML.
+## Configurations
 
-### UI Plugins
+### Globals
+Located in `globals.lua`, this file sets:
+- **Leader Key**: `<Space>`.
+- **Nerd Font Support**: Toggle based on terminal capabilities.
+- **Copilot Configuration**: Enable for all file types.
 
-- **olimorris/onedarkpro.nvim**:
-  - Farbschema-Plugin, das das beliebte OneDark-Farbschema bereitstellt.
+### Options
+Found in `options.lua`, it configures:
+- **Line Numbers**: Absolute and relative.
+- **Mouse Mode**: Enabled.
+- **Clipboard**: Synchronized with OS.
+- **Indentation**: Auto, smart, and C-specific indentation.
+- **Search**: Case-insensitive with smart case.
+- **Sign Column**: Always on.
+- **Scrolling**: 10 lines above and below the cursor.
+- **Relative Numbers**: Enabled for navigation.
+- **Timeout Length**: Shortened for `which-key` popups.
 
-### Completion Plugins
+### Autocommands
+Managed in `basicAutocommands.lua`, including:
+- **Yank Highlight**: Visual feedback on copy.
+- **Prettier Formatting**: Auto-format JSON, JS, TS, and Markdown on save.
+- **C# Formatting**: LSP-based formatting on save.
 
-- **hrsh7th/nvim-cmp**:
-  - Autocompletion-Plugin für Neovim.
-- **L3MON4D3/LuaSnip**:
-  - Snippet-Engine für Neovim.
-- **saadparwaiz1/cmp_luasnip**:
-  - Integration von LuaSnip in nvim-cmp.
-- **hrsh7th/cmp-nvim-lsp**:
-  - LSP-Quelle für nvim-cmp.
-- **hrsh7th/cmp-path**:
-  - Pfadquelle für nvim-cmp.
-- **folke/lazydev.nvim**:
-  - Konfiguriert die Lua LSP für Neovim-Konfigurationen, Laufzeit und Plugins. Bietet Vervollständigung, Annotationen und Signaturen für Neovim-APIs.
-  - Beispiel für die Konfiguration:
+### Lazy Installation
+The `lazyInstallation.lua` script ensures:
+- Installation of `lazy.nvim` if not already available.
+- Custom icons based on Nerd Font availability.
 
-    ```lua
-    require('lazydev').setup {
-      library = {
-        { path = 'luvit-meta/library', words = { 'vim%.uv' } },
-      },
-    }
-    ```
+---
 
-### Fuzzy Finder Plugins
+## Formatting Tools
+- **Stylua**: Lua code formatting (`stylua.toml` configuration).
 
-- **nvim-telescope/telescope.nvim**:
-  - Fuzzy Finder, der Dateien, LSP-Symbole und vieles mehr durchsuchen kann.
-  - Abhängigkeiten:
-    - **nvim-lua/plenary.nvim**: Hilfsbibliothek für Neovim Plugins.
-    - **nvim-telescope/telescope-fzf-native.nvim**: FZF-Suchalgorithmus-Unterstützung für Telescope.
-    - **nvim-telescope/telescope-ui-select.nvim**: Ermöglicht die Nutzung von Telescope für die Neovim UI-Auswahl.
-    - **nvim-tree/nvim-web-devicons**: Icons für eine ansprechendere Darstellung (erfordert Nerd Fonts).
-    - **nvim-telescope/telescope-file-browser.nvim**: Dateibrowser-Erweiterung für Telescope.
+---
 
-### Key Mapping Plugins
-
-- **folke/which-key.nvim**:
-  - Plugin, das eine visuelle Übersicht für verfügbare Tastenbindungen bietet.
-  - Beispiel für die Konfiguration:
-
-    ```lua
-    require('which-key').setup()
-    require('which-key').add {
-      { '<leader>c', group = '[C]ode' },
-      { '<leader>d', group = '[D]ocument' },
-      { '<leader>r', group = '[R]ename' },
-      { '<leader>s', group = '[S]earch' },
-      { '<leader>w', group = '[W]orkspace' },
-      { '<leader>t', group = '[T]oggle' },
-      { '<leader>h', group = 'Git [H]unk', mode = { 'n', 'v' } },
-    }
-    ```
-
-### Indentation Plugins
-
-- **lukas-reineke/indent-blankline.nvim**:
-  - Ein Plugin zur Anzeige von Einzugsführungen (indent guides).
-  - Beispiel für die Konfiguration:
-
-    ```lua
-    require('indent_blankline').setup {
-      char = "│",
-      show_trailing_blankline_indent = false,
-      show_first_indent_level = true,
-      use_treesitter = true,
-      show_current_context = true,
-      show_current_context_start = true,
-    }
-    ```
-
-### Additional Plugins
-
-- **prettier/vim-prettier**:
-  - Ein Plugin zur Verwendung von Prettier zum Formatieren von Code.
-  - Beispiel für die Konfiguration:
-
-    ```lua
-    return {
-      'prettier/vim-prettier',
-      run = 'yarn install --frozen-lockfile --production',
-      cmd = 'Prettier',
-      ft = { 'javascript', 'typescript', 'css', 'scss', 'json', 'markdown' },
-    }
-    ```
-- **github/copilot.vim**:
-  - Ein Plugin zur Integration von GitHub Copilot in Neovim.
-  - Beispiel für die Konfiguration:
-
-    ```lua
-    return {
-      'github/copilot.vim',
-      config = function()
-        vim.g.copilot_no_tab_map = true
-        vim.api.nvim_set_keymap('i', '<C-J>', 'copilot#Accept("<CR>")', { silent = true, expr = true })
-      end,
-    }
-    ```
-- **folke/todo-comments.nvim**:
-  - Ein Plugin zur Hervorhebung und Handhabung von TODO-Kommentaren.
-  - Beispiel für die Konfiguration:
-
-    ```lua
-    return {
-      'folke/todo-comments.nvim',
-      event = 'VimEnter',
-      dependencies = { 'nvim-lua/plenary.nvim' },
-      opts = { signs = false },
-    }
-    ```
-- **echasnovski/mini.nvim**:
-  - Eine Sammlung verschiedener kleiner unabhängiger Plugins/Module.
-  - Beispiel für die Konfiguration:
-
-    ```lua
-    return {
-      'echasnovski/mini.nvim',
-      config = function()
-        require('mini.ai').setup { n_lines = 500 }
-        require('mini.surround').setup()
-        local statusline = require 'mini.statusline'
-        statusline.setup { use_icons = vim.g.have_nerd_font }
-        statusline.section_location = function()
-          return '%2l:%-2v'
-        end
-      end,
-    }
-    ```
-- **nvim-treesitter/nvim-treesitter**:
-  - Ein Plugin zur Verbesserung der Syntaxhervorhebung und -bearbeitung.
-  - Beispiel für die Konfiguration:
-
-    ```lua
-    return {
-      'nvim-treesitter/nvim-treesitter',
-      build = ':TSUpdate',
-      opts = {
-        ensure_installed = { 'bash', 'c', 'diff', 'html', 'lua', 'luadoc', 'markdown', 'markdown_inline', 'query', 'vim', 'vimdoc', 'c_sharp' },
-        auto_install = true,
-        highlight = {
-          enable = true,
-          additional_vim_regex_highlighting = { 'ruby' },
-        },
-        indent = { enable = true, disable = { 'ruby' } },
-        folding = { enable = true, disable = {} },
-      },
-      config = function(_, opts)
-        require('nvim-treesitter.configs').setup(opts)
-      end,
-    }
-    ```
-
-### DAP Plugins
-
-- **mfussenegger/nvim-dap**:
-  - Debug Adapter Protocol (DAP) Unterstützung für Neovim, ermöglicht Debugging von Code direkt in Neovim.
-  - Konfigurationen für .NET (netcoredbg) und PowerShell (PSES - PowerShell Editor Services).
-- **rcarriga/nvim-dap-ui**:
-  - Benutzeroberfläche für nvim-dap, um Debugging-Informationen grafisch anzuzeigen.
-
+## Next Steps
+In the next phase, we will:
+1. Test individual plugins to ensure functionality.
+2. Debug and fix configuration issues.
+3. Document missing plugin details in this README.
