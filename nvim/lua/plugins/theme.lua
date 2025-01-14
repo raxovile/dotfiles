@@ -1,5 +1,5 @@
 return {
-  { 
+  {
     'olimorris/onedarkpro.nvim', -- OneDark theme
     priority = 1000,
     init = function()
