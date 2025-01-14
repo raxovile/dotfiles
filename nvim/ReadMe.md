@@ -126,6 +126,39 @@ Diese Datei bündelt Plugins für die Git-Integration:
 - Beide Plugins verbessern den Workflow im Umgang mit Git innerhalb von Neovim.
 - `gitsigns.nvim` wurde so konfiguriert, dass es spezifische Symbole für unterschiedliche Git-Operationen verwendet.
 
+### Telescope Plugin
+
+**Zweck:**  
+Telescope bietet eine leistungsstarke Fuzzy-Suche für Dateien, Symbole, LSP-Informationen und mehr direkt in Neovim.
+
+**Datei:** `telescope.lua`
+
+- **Ladeverhalten und Abhängigkeiten:**  
+  Wird beim `VimEnter`-Ereignis geladen und erfordert mehrere Abhängigkeiten (u.a. `plenary.nvim`, `telescope-fzf-native.nvim`, `telescope-ui-select.nvim`, `nvim-web-devicons`, `telescope-file-browser.nvim`).
+  
+- **Konfiguration und Keymaps:**  
+  Konfiguriert Erweiterungen für UI-Selektoren und Dateibrowser sowie diverse Keymaps für schnelle Suchaktionen und Navigation.
+
+Die vollständige Konfiguration befindet sich in der separaten Datei `telescope.lua`.
+
+### Treesitter Plugin
+
+**Zweck:**  
+Treesitter sorgt für fortschrittliche Syntaxhervorhebung, Einrückung, Faltung und andere sprachspezifische Verbesserungen durch die Verwendung von Parsern.
+
+**Datei:** `treesitter.lua`
+
+- **Installation und Updates:**  
+  Das Plugin aktualisiert die Treesitter-Parser automatisch mit `:TSUpdate`.
+  
+- **Konfiguration:**  
+  - **Ensure Installed:** Stellt sicher, dass Parser für gängige Sprachen (z.B. Bash, C, HTML, Lua, Markdown, Vimscript, C#) installiert sind.
+  - **Highlighting:** Aktiviert syntaxbasiertes Highlighting und fügt zusätzliche Regex-Hervorhebungen für Ruby hinzu.
+  - **Indentation:** Aktiviert die automatische Einrückung für die meisten Sprachen, deaktiviert jedoch für Ruby.
+  - **Folding:** Aktiviert Code-Folding basierend auf Treesitter.
+
+Die vollständige Konfiguration befindet sich in der separaten Datei `treesitter.lua`.
+
 ### Editor-Verbesserungs-Plugins
 
 **Datei:** `editor.lua`
@@ -197,18 +230,114 @@ Telescope bietet eine leistungsstarke Fuzzy-Suche für Dateien, Symbole, LSP-Inf
 **Vorteile:**  
 Durch die Auslagerung in eine eigene Datei bleibt die Konfiguration modular und übersichtlich. Telescope verbessert die Navigation und Dateisuche innerhalb von Neovim erheblich und ist flexibel anpassbar durch Erweiterungen und individuelle Tastenzuweisungen.
 
-## LSP-Konfiguration
+### LSP-Konfiguration
 
-*(Unverändert aus vorheriger Version)*
+**Zweck:**  
+Die LSP-Konfiguration integriert Language Server Protokoll (LSP) Unterstützung in Neovim, um intelligente Funktionen wie Autovervollständigung, Fehlerdiagnosen, Code-Navigation und Refactoring-Tools bereitzustellen. Sie sorgt für eine nahtlose Entwicklungserfahrung über verschiedene Programmiersprachen hinweg.
 
-## Theme
+**Wichtige Aspekte der Konfiguration:**
 
-*(Unverändert aus vorheriger Version)*
+- **Grundgerüst:**  
+  - Verwendet `neovim/nvim-lspconfig` als Basis für die LSP-Integration.
+  - Ergänzt durch `mason.nvim` und verwandte Plugins für die automatische Installation und Verwaltung von LSP-Servern und zugehörigen Tools.
+  - Bindet Status- und Fortschrittsanzeigen durch Plugins wie `fidget.nvim` und `lsp-status.nvim` ein.
+
+- **Server-spezifische Einstellungen:**  
+  - **Lua:** Konfiguration des Lua Language Servers mit angepassten Einstellungen für Autovervollständigung und Diagnostik.
+  - **C# (OmniSharp):**  
+    - Einrichtung des OmniSharp Language Servers für C#-Dateien.
+    - Konfiguration umfasst Anpassungen wie das Organisieren von Imports und Code-Aktionen.
+  - **PowerShell:**  
+    - Einrichtung des PowerShell Editor Services für PowerShell-Skripte.
+    - Anpassungen für die Codeformatierung und korrekte Casing von Aliases.
+
+- **Allgemeine LSP-Funktionen:**  
+  - Automatisches Einrichten von Keymaps beim Anhängen eines LSP-Clients an einen Buffer, z. B. für das Springen zu Definitionen, Referenzen, Implementierungen und mehr.
+  - Autohervorhebung von Symbolreferenzen im Dokument und Möglichkeiten zum Löschen dieser Hervorhebungen.
+  - Unterstützung für Inlay-Hints, die zusätzliche Informationen im Code anzeigen können.
+  - Integration mit `nvim-cmp` zur Bereitstellung von LSP-gestützten Vervollständigungen.
+  - Konfiguration von Diagnostik-Einstellungen zur Darstellung von Fehlern und Warnungen im Editor.
+
+- **Ergänzende Tools:**  
+  - Verwendung von `null-ls.nvim` für die Integration externer Linter und Formatter wie `clang_format`.
+  - Lazy-Entwicklung (`lazydev.nvim`) zur Unterstützung der Lua-Entwicklung und Neovim-API-Vervollständigung.
+
+**Vorteile der LSP-Integration:**
+
+- **Intelligente Funktionen:**  
+  Verbesserte Autovervollständigung, sofortige Feedback zu Codefehlern und -warnungen, sowie kontextbezogene Codeaktionen erleichtern den Entwicklungsprozess erheblich.
+  
+- **Automatisierung und Konsistenz:**  
+  Automatische Installation und Konfiguration der benötigten Sprachserver stellen sicher, dass die Entwicklungsumgebung konsistent und stets auf dem neuesten Stand ist.
+
+- **Erweiterbarkeit:**  
+  Die modulare Konfiguration ermöglicht es, weitere LSP-Server und Tools einfach hinzuzufügen oder bestehende anzupassen, um spezifischen Entwicklungsanforderungen gerecht zu werden.
+
+### Theme
+
+**Zweck:**  
+Das Theme-Plugin `onedarkpro.nvim` sorgt für eine ansprechende und klare Farbgebung, die die Lesbarkeit und den ästhetischen Eindruck des Editors verbessert.
+
+**Konfiguration und Verhalten:**
+
+- **Plugin:** `olimorris/onedarkpro.nvim`
+- **Priority:** Wird mit hoher Priorität (`priority = 1000`) geladen, um sicherzustellen, dass das Farbschema frühzeitig gesetzt wird.
+- **Initialisierung:**  
+  - Setzt das `onedark` Farbthema als aktives Colorscheme.
+  - Passt die Darstellung von Kommentaren an, indem die grafischen Attribute (`gui`) deaktiviert werden, um z. B. kursive oder fette Schrift zu vermeiden.
+
+### Utilities und diverse Plugins
+
+**Zweck:**  
+Diese Datei bündelt eine Sammlung kleiner, aber nützlicher Plugins, die verschiedene unterstützende Funktionen bereitstellen und den Arbeitsalltag in Neovim erleichtern.
+
+**Datei:** `misc.lua`
+
+**Enthaltene Plugins und ihre Funktionen:**
+- **vim-sleuth:**  
+  - Erkennt automatisch die Tabstop- und Shiftwidth-Einstellungen basierend auf dem geöffneten File.
+- **lazy.nvim:**  
+  - Lazy Plugin Manager zur effizienten Plugin-Verwaltung *(falls nicht bereits zentral in `lazyInstallation.lua` konfiguriert)*.
+- **ripgrep:**  
+  - Schnelle Dateisuche über das Kommandozeilentool `ripgrep`.
+- **plenary.nvim:**  
+  - Eine Utility-Bibliothek, die von vielen Neovim-Plugins verwendet wird.
+- **vim-ps1:**  
+  - Unterstützt die Syntaxhervorhebung für PowerShell-Skripte.
+- **azure-functions.nvim:**  
+  - Bietet Unterstützung für Azure Functions innerhalb von Neovim.
+
+Die vollständige Konfiguration dieser Plugins befindet sich in der separaten Datei `misc.lua`.
 
 ## Auto-Format on Save
 
-*(Unverändert aus vorheriger Version)*
+Die Konfiguration implementiert automatisches Formatieren beim Speichern für folgende Dateitypen:
 
-## Zukünftige Erweiterungen
+- **C# (`*.cs`):**  
+  Beim Speichern einer C#-Datei wird durch einen Autocommand `vim.lsp.buf.format()` eine Formatierung ausgeführt.
 
-*(Unverändert aus vorheriger Version)*
+- **Web- und Script-Dateien:**  
+  Vor dem Speichern von Dateien mit den Endungen:
+  - `.json`
+  - `.js`
+  - `.ts`
+  - `.css`
+  - `.scss`
+  - `.md`
+  - `.html`  
+  wird `Prettier` asynchron ausgeführt, um den Code zu formatieren.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
