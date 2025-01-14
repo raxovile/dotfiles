@@ -127,7 +127,7 @@ vim.cmd [[autocmd BufWritePre *.cs lua vim.lsp.buf.format()]]
 vim.cmd [[
   augroup PrettierOnSave
     autocmd!
-    autocmd BufWritePre *.json,*.js,*.ts,*.css,*.scss,*.md PrettierAsync
+    autocmd BufWritePre *.json,*.js,*.ts,*.css,*.scss,*.md,*.html PrettierAsync
   augroup END
 ]]
 
