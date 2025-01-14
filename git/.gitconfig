@@ -10,4 +10,4 @@
 [alias]
 	st = status
 [push]
-	autoSetupRemote = simple
+	autoSetupRemote = true
