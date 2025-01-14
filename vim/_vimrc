@@ -1,7 +1,8 @@
-" [[ Setting options ]]
+" [[ Setting options ]]"
 
 " Syntax aktivieren 
 syntax on
+
 " Zeilennummern aktivieren
 set number
 
@@ -15,7 +16,7 @@ set mouse=a
 set noshowmode
 
 " System-Clipboard für Yank, Put und Delete verwenden
-set clipboard=unnamed
+set clipboard=unnamedplus
 
 " Conceal-Level setzen
 set conceallevel=2
@@ -52,16 +53,16 @@ set splitbelow
 set list
 set listchars=tab:»\ ,trail:·,nbsp:␣
 
-" Cursor-Zeile anzeigen
-" set cursorline
+" Cursorposition in der Statuszeile anzeigen
+set ruler
+
+" Statuszeile immer anzeigen
+set laststatus=2
 
 " Minimalen Abstand zum oberen und unteren Bildschirmrand halten
 set scrolloff=10
 
-" Relative Zeilennummern aktivieren
-set relativenumber
-
-" [[ Keymaps ]]
+" [[ Keymaps ]]"
 
 " Hervorhebung bei Suche aufheben mit <Esc> in normalem Modus
 nnoremap <Esc> :nohlsearch<CR>
@@ -84,7 +85,7 @@ nnoremap <C-l> <C-w>l
 nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 
-" [[ Autocommands ]]
+" [[ Autocommands ]]"
 
 " Highlight beim Kopieren
 augroup highlight_yank
