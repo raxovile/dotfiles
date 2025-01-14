@@ -1,17 +1,4 @@
 return {
-  { 'tpope/vim-fugitive' }, -- Git integration
-  {
-    'lewis6991/gitsigns.nvim', -- Git signs
-    opts = {
-      signs = {
-        add = { text = '+' },
-        change = { text = '~' },
-        delete = { text = '_' },
-        topdelete = { text = '‾' },
-        changedelete = { text = '~' },
-      },
-    },
-  },
   {
     'windwp/nvim-autopairs', -- Automatic pairing of brackets
     config = function()
@@ -57,5 +44,11 @@ return {
       main = 'ibl',
       opts = {},
     },
+  },
+  {
+  'prettier/vim-prettier',
+  run = 'yarn install --frozen-lockfile --production',
+  cmd = 'Prettier',
+  ft = { 'javascript', 'typescript', 'css', 'scss', 'json', 'markdown', 'html' },
   },
 }
