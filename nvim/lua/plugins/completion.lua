@@ -1,9 +1,9 @@
 return {
-  { 
+  {
     'hrsh7th/nvim-cmp', -- Completion engine
     event = 'InsertEnter',
     dependencies = {
-      { 
+      {
         'L3MON4D3/LuaSnip',
         build = (function()
           if vim.fn.has 'win32' == 1 or vim.fn.executable 'make' == 0 then

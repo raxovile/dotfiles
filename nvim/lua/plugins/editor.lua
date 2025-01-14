@@ -50,5 +50,12 @@ return {
         extra_args = { '--style=file', '--assume-filename=' .. vim.fn.stdpath 'config' .. '.clang-format' },
       },
     },
+    {
+      'lukas-reineke/indent-blankline.nvim',
+      -- Enable `lukas-reineke/indent-blankline.nvim`
+      -- See `:help ibl`
+      main = 'ibl',
+      opts = {},
+    },
   },
 }
