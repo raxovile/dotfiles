@@ -11,3 +11,11 @@ vim.api.nvim_create_autocmd('TextYankPost', {
     vim.highlight.on_yank()
   end,
 })
+
+-- Autoformat Lua-Dateien beim Speichern
+vim.api.nvim_create_autocmd('BufWritePre', {
+  pattern = '*.lua',
+  callback = function()
+    require('conform').format { async = true, lsp_fallback = true }
+  end,
+})
