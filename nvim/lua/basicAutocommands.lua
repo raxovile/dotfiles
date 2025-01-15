@@ -1,9 +1,7 @@
 -- [[ Basic Autocommands ]]
---  See `:help lua-guide-autocommands`
+-- See `:help lua-guide-autocommands`
 
 -- Highlight when yanking (copying) text
---  Try it with `yap` in normal mode
---  See `:help vim.highlight.on_yank()`
 vim.api.nvim_create_autocmd('TextYankPost', {
   desc = 'Highlight when yanking (copying) text',
   group = vim.api.nvim_create_augroup('kickstart-highlight-yank', { clear = true }),
@@ -15,7 +13,39 @@ vim.api.nvim_create_autocmd('TextYankPost', {
 -- Autoformat Lua-Dateien beim Speichern
 vim.api.nvim_create_autocmd('BufWritePre', {
   pattern = '*.lua',
+  group = vim.api.nvim_create_augroup('lua-autoformat', { clear = true }),
   callback = function()
-    require('conform').format { async = true, lsp_fallback = true }
+    local conform = require('conform')
+    if conform then
+      conform.format { async = true, lsp_fallback = true }
+    else
+      print('Conform is not available')
+    end
+  end,
+})
+
+-- Auto-Formatierung bei jedem Speichern for C#
+vim.api.nvim_create_autocmd('BufWritePre', {
+  pattern = '*.cs',
+  group = vim.api.nvim_create_augroup('cs-autoformat', { clear = true }),
+  callback = function()
+    if vim.lsp.buf.format then
+      vim.lsp.buf.format()
+    else
+      print('LSP formatting is not available for this buffer')
+    end
+  end,
+})
+
+-- Prettier nur ausführen, wenn es installiert ist und der Dateityp unterstützt wird
+vim.api.nvim_create_autocmd('BufWritePre', {
+  pattern = { '*.json', '*.js', '*.ts', '*.css', '*.scss', '*.md', '*.html' },
+  group = vim.api.nvim_create_augroup('prettier-on-save', { clear = true }),
+  callback = function()
+    if vim.fn.exists(':PrettierAsync') == 2 then
+      vim.cmd('PrettierAsync')
+    else
+      print('Prettier is not installed or not available for this file type')
+    end
   end,
 })
