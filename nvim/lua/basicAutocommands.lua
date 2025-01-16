@@ -42,10 +42,11 @@ vim.api.nvim_create_autocmd('BufWritePre', {
   pattern = { '*.json', '*.js', '*.ts', '*.css', '*.scss', '*.md', '*.html' },
   group = vim.api.nvim_create_augroup('prettier-on-save', { clear = true }),
   callback = function()
-    if vim.fn.exists(':PrettierAsync') == 2 then
+    local is_supported = vim.tbl_contains({ 'json', 'javascript', 'typescript', 'css', 'scss', 'markdown', 'html' }, vim.bo.filetype)
+    if is_supported and vim.fn.exists(':PrettierAsync') == 2 then
       vim.cmd('PrettierAsync')
     else
-      print('Prettier is not installed or not available for this file type')
+      print('Prettier cannot be executed for this file type')
     end
   end,
 })
