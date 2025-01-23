@@ -85,6 +85,9 @@ return {
     dependencies = { 'mfussenegger/nvim-dap' },
   },
   {
+    "nvim-neotest/nvim-nio"
+  },
+  {
     'theHamsta/nvim-dap-virtual-text',          -- Ergänzung für Debugging-Informationen im Quellcode
     dependencies = { 'mfussenegger/nvim-dap' }, -- Abhängigkeit zu nvim-dap
     config = function()
