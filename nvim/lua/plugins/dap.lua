@@ -33,8 +33,8 @@ return {
           [[& {
           Import-Module PowerShellEditorServices;
           Start-EditorServices -HostName 'nvim' -HostProfileId 0 -HostVersion '0.1.0' -LogPath "$HOME/.local/share/nvim/lsp_log" -SessionDetailsPath "$HOME/.local/share/nvim/sessions/powershell.session.json" -FeatureFlags @() -BundledModulesPath ']]
-            .. tools_path
-            .. [[/PowerShellEditorServices/PowerShellEditorServices' -EnableConsoleRepl;
+          .. tools_path
+          .. [[/PowerShellEditorServices/PowerShellEditorServices' -EnableConsoleRepl;
         }]],
         },
       }
@@ -60,7 +60,8 @@ return {
       vim.api.nvim_set_keymap('n', '<F10>', "<Cmd>lua require'dap'.step_over()<CR>", { noremap = true, silent = true })
       vim.api.nvim_set_keymap('n', '<F11>', "<Cmd>lua require'dap'.step_into()<CR>", { noremap = true, silent = true })
       vim.api.nvim_set_keymap('n', '<F12>', "<Cmd>lua require'dap'.step_out()<CR>", { noremap = true, silent = true })
-      vim.api.nvim_set_keymap('n', '<Leader>b', "<Cmd>lua require'dap'.toggle_breakpoint()<CR>", { noremap = true, silent = true })
+      vim.api.nvim_set_keymap('n', '<Leader>b', "<Cmd>lua require'dap'.toggle_breakpoint()<CR>",
+        { noremap = true, silent = true })
       vim.api.nvim_set_keymap(
         'n',
         '<Leader>B',
@@ -73,8 +74,10 @@ return {
         "<Cmd>lua require'dap'.set_breakpoint(nil, nil, vim.fn.input('Log point message: '))<CR>",
         { noremap = true, silent = true }
       )
-      vim.api.nvim_set_keymap('n', '<Leader>dr', "<Cmd>lua require'dap'.repl.open()<CR>", { noremap = true, silent = true })
-      vim.api.nvim_set_keymap('n', '<Leader>dl', "<Cmd>lua require'dap'.run_last()<CR>", { noremap = true, silent = true })
+      vim.api.nvim_set_keymap('n', '<Leader>dr', "<Cmd>lua require'dap'.repl.open()<CR>",
+        { noremap = true, silent = true })
+      vim.api.nvim_set_keymap('n', '<Leader>dl', "<Cmd>lua require'dap'.run_last()<CR>",
+        { noremap = true, silent = true })
     end,
   },
   {
@@ -82,16 +85,16 @@ return {
     dependencies = { 'mfussenegger/nvim-dap' },
   },
   {
-    'theHamsta/nvim-dap-virtual-text', -- Ergänzung für Debugging-Informationen im Quellcode
+    'theHamsta/nvim-dap-virtual-text',          -- Ergänzung für Debugging-Informationen im Quellcode
     dependencies = { 'mfussenegger/nvim-dap' }, -- Abhängigkeit zu nvim-dap
     config = function()
       require('nvim-dap-virtual-text').setup {
-        enabled = true, -- Aktiviert die virtuelle Textanzeige
-        enabled_commands = true, -- Aktiviert :DapVirtualTextEnable/Disable-Befehle
+        enabled = true,                     -- Aktiviert die virtuelle Textanzeige
+        enabled_commands = true,            -- Aktiviert :DapVirtualTextEnable/Disable-Befehle
         highlight_changed_variables = true, -- Hebt geänderte Variablen hervor
-        highlight_new_as_changed = true, -- Hebt neue Variablen als geändert hervor
-        show_stop_reason = true, -- Zeigt den Grund für das Stoppen an
-        commented = false, -- Fügt keine Kommentare zu den Variablen hinzu
+        highlight_new_as_changed = true,    -- Hebt neue Variablen als geändert hervor
+        show_stop_reason = true,            -- Zeigt den Grund für das Stoppen an
+        commented = false,                  -- Fügt keine Kommentare zu den Variablen hinzu
       }
     end,
   },
