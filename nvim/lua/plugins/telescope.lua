@@ -78,5 +78,15 @@ return {
     vim.keymap.set('n', '<leader>fb', function()
       require('telescope').extensions.file_browser.file_browser()
     end, { desc = '[F]ile [B]rowser' })
+
+
+    vim.keymap.set('n', '<leader>f.', function()
+      require('telescope').extensions.file_browser.file_browser({ path = vim.fn.expand('%:p:h') })
+    end, { desc = '[F]ile Browser in Current Directory' })
+
+
+    vim.keymap.set('n', '<leader>fc', function()
+      require('telescope').extensions.file_browser.file_browser({ path = vim.fn.getcwd() })
+    end, { desc = '[F]ile Browser in CWD' })
   end,
 }
