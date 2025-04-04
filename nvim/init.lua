@@ -7,8 +7,12 @@ require 'options'
 -- Load vim basic autocommands
 require 'basicAutocommands'
 
+-- Load vim keymaps
+require('keymaps')
+
 -- Load lazy.vim as Plugin Manager
 require 'lazyInstallation'
+
 -- Configure and install plugins
 require('lazy').setup({
   { import = 'plugins.utility' },
