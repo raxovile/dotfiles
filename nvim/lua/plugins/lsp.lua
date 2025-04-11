@@ -173,22 +173,6 @@ return {
       }
     end,
   },
-
-  -- Null-ls für externe Linter und Formatter
-  {
-    'jose-elias-alvarez/null-ls.nvim',
-    config = function()
-      local null_ls = require 'null-ls'
-      null_ls.setup {
-        sources = {
-          null_ls.builtins.formatting.clang_format.with {
-            filetypes = { 'c', 'cpp', 'cs', 'typescript', 'javascript', 'json' }, -- Hier die gewünschten Sprachen
-          },
-        },
-      }
-    end,
-  },
-
   {
     -- `lazydev` konfiguriert die Lua LSP für deine Neovim-Konfiguration, Runtime und Plugins
     -- Wird für die Vervollständigung, Annotationen und Signaturen der Neovim APIs benutzt
