@@ -24,6 +24,7 @@ require('lazy').setup({
   { import = 'plugins.dap' },
   { import = 'plugins.telescope' },
   { import = 'plugins.treesitter' },
+  { import = 'plugins.githubCopilot' },
   --  { import = 'plugins.obsidian' },
 }, {
   ui = {
